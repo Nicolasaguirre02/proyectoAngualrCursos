@@ -1,0 +1,76 @@
+<div id="contenedor_formulario">
+    <h2 appTitulos >Modificar alumno</h2>
+    <form [formGroup]="formularioAlumno" (submit)="guardarModificacion()"  id="formulario">
+      <div class="row">
+        <div class="col-6 columna">
+            <mat-form-field class="form" appearance="outline">
+              <mat-label>Nombre</mat-label>
+              <input
+                    type="text"
+                    matInput placeholder="Placeholder"
+                    formControlName="nombre"
+              >
+              <samp appFormsValidaciones
+                [pasarErrores]="formularioAlumno.get('nombre')?.errors"
+              >El nombre es obligatorio</samp>
+            </mat-form-field>
+        </div>
+        <div class="col-6 columna">
+          <mat-form-field class="form" appearance="outline">
+            <mat-label>Apellido</mat-label>
+            <input 
+                type="text"
+                  matInput placeholder="Placeholder"
+                  formControlName="apellido">
+                  <samp appFormsValidaciones
+                  [pasarErrores]="formularioAlumno.get('apellido')?.errors"
+                >El nombre es obligatorio</samp>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-5 columna">
+            <mat-form-field  class="form" appearance="outline">
+              <mat-label>Edad</mat-label>
+              <input 
+                    type="number"
+                    matInput placeholder="Placeholder"
+                    formControlName="edad"
+                  >
+                  <samp appFormsValidaciones
+                [pasarErrores]="formularioAlumno.get('edad')?.errors"
+              >El nombre es obligatorio</samp>
+            </mat-form-field>
+        </div>
+        <div class="col-5 columna">
+          <mat-form-field>
+            <mat-label>Curso</mat-label>
+            <select formControlName="curso" matNativeControl required>
+              <option *ngFor="let curso of listaCursos" [value]="curso.value">{{ curso.nombre }}</option>
+            </select> 
+            <samp appFormsValidaciones
+                [pasarErrores]="formularioAlumno.get('curso')?.errors"
+              >El nombre es obligatorio</samp>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-2 columna">
+          <mat-form-field class="form" appearance="outline">
+            <mat-label>Nota</mat-label>
+            <input 
+                  type="number"
+                   matInput placeholder="Placeholder"              
+                   formControlName="nota">
+                   <samp appFormsValidaciones
+                [pasarErrores]="formularioAlumno.get('nota')?.errors"
+              >El nombre es obligatorio</samp>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="row">
+        <button mat-raised-button type="submit" color="primary" >Guardar</button>
+      </div>
+    </form>
+  </div>

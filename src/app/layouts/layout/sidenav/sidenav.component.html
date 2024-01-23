@@ -1,0 +1,26 @@
+<mat-drawer-container id="sidenav" class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+      
+    </mat-drawer>
+  
+    <div class="example-sidenav-content">
+
+        <mat-toolbar>
+            <button  (click)="drawer.toggle()"  mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon >menu</mat-icon>
+            </button>
+            <div  class="d-flex" style="justify-content: center; width: 100%;">
+                <span>Cursos</span>
+            </div>
+        </mat-toolbar>
+
+        <app-listado-alumnos></app-listado-alumnos>
+
+    </div>
+  
+</mat-drawer-container>
+
+
+
+
+  

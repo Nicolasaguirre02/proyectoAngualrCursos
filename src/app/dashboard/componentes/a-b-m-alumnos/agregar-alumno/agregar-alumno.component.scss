@@ -1,0 +1,21 @@
+#contenedor_formulario{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#formulario{
+    width: 50%;
+}
+.columna{
+    padding: 0px;
+}
+.row{
+    padding: 0px;
+}
+
+.form {
+    width: 90%;
+}
