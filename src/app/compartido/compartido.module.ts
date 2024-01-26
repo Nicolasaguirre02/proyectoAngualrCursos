@@ -17,7 +17,8 @@ import { TitulosDirective } from './directivas/titulos.directive';
   ],
   exports:[
     FormsValidacionesDirective,
-    ListaAlumnoPipe
+    ListaAlumnoPipe,
+    TitulosDirective
   ]
 })
 export class CompartidoModule { }
