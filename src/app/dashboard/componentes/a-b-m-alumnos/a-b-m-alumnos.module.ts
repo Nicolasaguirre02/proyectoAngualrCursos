@@ -13,7 +13,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import { ModificarAlumnoComponent } from './modificar-alumno/modificar-alumno.component';
 import { CompartidoModule } from '../../../compartido/compartido.module';
-import { ListaAlumnoPipe } from '../../../compartido/pipe/lista-alumno.pipe';
+import { CargarAlumnosService } from '../../../core/servicios/cargar-alumnos.service';
+import { CargaMockAlumnosService } from '../../../core/servicios/carga-mock-alumnos.service';
 
 
 
@@ -21,7 +22,7 @@ import { ListaAlumnoPipe } from '../../../compartido/pipe/lista-alumno.pipe';
   declarations: [
     ListadoAlumnosComponent,
     AgregarAlumnoComponent,
-    ModificarAlumnoComponent,
+    ModificarAlumnoComponent
   ],
   imports: [
     CommonModule,
@@ -33,12 +34,18 @@ import { ListaAlumnoPipe } from '../../../compartido/pipe/lista-alumno.pipe';
     MatButtonModule,
     MatSelectModule,
     ReactiveFormsModule,
-    CompartidoModule,
+    CompartidoModule
   ],
   exports: [
     ListadoAlumnosComponent,
     AgregarAlumnoComponent,
     ModificarAlumnoComponent
+  ],
+  providers:[
+    {
+      provide: CargarAlumnosService,
+      useClass: CargaMockAlumnosService
+    }
   ]
 })
 export class ABMAlumnosModule { }

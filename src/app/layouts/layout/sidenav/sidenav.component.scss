@@ -4,3 +4,36 @@
 .example-sidenav{
     width: 20%;
 }
+
+h1{
+    color: coral;
+    margin-bottom: 30px;
+}
+
+#sidenav_items_conteneder{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.list-group{
+    /* justify-content: space-evenly; */
+    width: 90%;
+    height: 75vh;
+}
+
+.items{
+    margin-bottom: 30px;
+    border: 1px solid orange;
+    color: coral;
+    font-weight: bold;
+}
+.items:hover{
+    color: #45214A;
+    background-color: coral;
+}
+
+.link_activo{
+    color: #45214A;
+    background-color: coral;
+}

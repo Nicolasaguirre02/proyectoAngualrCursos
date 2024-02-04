@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsValidacionesDirective } from './directivas/forms-validaciones.directive';
 import { ListaAlumnoPipe } from './pipe/lista-alumno.pipe';
 import { TitulosDirective } from './directivas/titulos.directive';
+import { SpinnerComponent } from './componentes/spinner/spinner.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -10,15 +12,19 @@ import { TitulosDirective } from './directivas/titulos.directive';
   declarations: [
     FormsValidacionesDirective,
     ListaAlumnoPipe,
-    TitulosDirective
+    TitulosDirective,
+    SpinnerComponent,
+    
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatProgressSpinnerModule
   ],
   exports:[
     FormsValidacionesDirective,
     ListaAlumnoPipe,
-    TitulosDirective
+    TitulosDirective,
+    SpinnerComponent
   ]
 })
 export class CompartidoModule { }

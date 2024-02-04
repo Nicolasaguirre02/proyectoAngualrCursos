@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CargarCursosService } from '../../../../core/servicios/cargar-cursos.service';
 
 @Component({
   selector: 'app-agregar-alumno',
@@ -9,17 +10,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 
-export class AgregarAlumnoComponent {
+export class AgregarAlumnoComponent implements OnInit{
 
   @Output() alumnoCreado = new EventEmitter();
 
   listaCursos: any = [
-    {value: 'Angular', nombre: 'Angular'},
-    {value: 'WordPress', nombre: 'WordPress'},
-    {value: 'SQL', nombre: 'SQL'},
-    {value: 'Python', nombre: 'Python'},
-    {value: 'CSS', nombre: 'CSS'},
-    {value: 'Next.js', nombre: 'Next.js'},
+
   ];
 
   public formularioAlumno:FormGroup = this.form.group({
@@ -30,16 +26,25 @@ export class AgregarAlumnoComponent {
     nota:[ ,[Validators.required ]]
   })
 
-  constructor(private form:FormBuilder){}
+  constructor(private form:FormBuilder, private cursosServicio:CargarCursosService){}
+
+  ngOnInit(): void {
+    this.guardarListaCursos();
+  }
+
+  guardarListaCursos(){
+    this.cursosServicio.mostrarCursos()
+      .subscribe((cursos) => this.listaCursos = cursos);
+  }
 
 
   guardarAlumno(): void {
     if(this.formularioAlumno.invalid){
-      this.formularioAlumno.markAllAsTouched();
+      /* this.formularioAlumno.markAllAsTouched(); */
       return
     }else{
       this.alumnoCreado.emit(this.formularioAlumno.value);
-      this.formularioAlumno.reset()
+      this.formularioAlumno.reset();
     }
   }
 }

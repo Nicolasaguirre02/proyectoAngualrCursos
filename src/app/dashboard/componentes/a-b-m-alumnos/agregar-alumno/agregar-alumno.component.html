@@ -43,7 +43,7 @@
         <mat-form-field>
           <mat-label>Curso</mat-label>
           <select formControlName="curso" matNativeControl required>
-            <option *ngFor="let curso of listaCursos" [value]="curso.value">{{ curso.nombre }}</option>
+            <option *ngFor="let curso of listaCursos" [value]="curso.value">{{ curso.nombreCurso }}</option>
           </select>          
           <samp appFormsValidaciones
                 [pasarErrores]="formularioAlumno.get('curso')?.errors"

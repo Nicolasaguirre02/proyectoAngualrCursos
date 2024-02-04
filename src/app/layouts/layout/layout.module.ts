@@ -1,4 +1,3 @@
-import { ABMAlumnosModule } from './../../dashboard/componentes/a-b-m-alumnos/a-b-m-alumnos.module';
 import { DashboardModule } from './../../dashboard/dashboard.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -9,6 +8,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -21,7 +21,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    ABMAlumnosModule
+    DashboardModule,
+    RouterModule
   ],
   exports:[
     SidenavComponent

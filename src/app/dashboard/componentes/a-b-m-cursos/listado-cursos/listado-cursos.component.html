@@ -1,0 +1,68 @@
+<div id="contenedorTabla" class="container-fluid">
+
+    <div style="width: 100%; display: flex; border-bottom: 1px solid coral; margin-bottom: 6vh;">
+        <div style="width: 80%;">
+            <h1>Lista de cursos</h1>
+        </div>
+        <div style="width: 20%; display: flex; justify-content: end;">
+
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button (click)="crearDiaologNuevocurso()" mat-menu-item>
+                    <mat-icon>add_circle</mat-icon>
+                  <span>Agregar curso</span>
+                </button>
+              </mat-menu>
+
+        </div>
+    </div>
+    
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="idCurso">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.idCurso}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombreCurso">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.nombreCurso}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="inicio">
+          <th mat-header-cell *matHeaderCellDef> Inicia </th>
+          <td mat-cell *matCellDef="let element"> {{element.inicio | date:'dd/MM/yyyy'}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="finaliza">
+          <th mat-header-cell *matHeaderCellDef> Finaliza </th>
+          <td mat-cell *matCellDef="let element"> {{element.finaliza | date:'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let element"> 
+              <button (click)="editarCurso(element)"   type="button" class="btn btn-outline-secondary">
+                <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-brush-fill" viewBox="0 0 16 16">
+                  <path d="M15.825.12a.5.5 0 0 1 .132.584c-1.53 3.43-4.743 8.17-7.095 10.64a6.1 6.1 0 0 1-2.373 1.534c-.018.227-.06.538-.16.868-.201.659-.667 1.479-1.708 1.74a8.1 8.1 0 0 1-3.078.132 4 4 0 0 1-.562-.135 1.4 1.4 0 0 1-.466-.247.7.7 0 0 1-.204-.288.62.62 0 0 1 .004-.443c.095-.245.316-.38.461-.452.394-.197.625-.453.867-.826.095-.144.184-.297.287-.472l.117-.198c.151-.255.326-.54.546-.848.528-.739 1.201-.925 1.746-.896q.19.012.348.048c.062-.172.142-.38.238-.608.261-.619.658-1.419 1.187-2.069 2.176-2.67 6.18-6.206 9.117-8.104a.5.5 0 0 1 .596.04"/>
+                </svg>
+              </button>
+              
+              <button (click)="eliminarCurso(element.idCurso)" type="button" class="btn btn-outline-danger">
+                <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                </svg>
+              </button>
+            </td>
+          </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      
+      
+
+</div>

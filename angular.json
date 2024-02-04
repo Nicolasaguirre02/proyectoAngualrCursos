@@ -24,7 +24,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "baseHref": "https://Nicolasaguirre02.github.io/proyectoAngularCursos/",
             "outputPath": "dist/primer-entrega",
             "index": "src/index.html",
             "browser": "src/main.ts",

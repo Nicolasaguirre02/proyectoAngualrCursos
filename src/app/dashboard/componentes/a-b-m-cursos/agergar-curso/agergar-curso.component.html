@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>Nueco curso</h2>
+<mat-dialog-content>
+  <form [formGroup]="formularioCurso">
+
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-md-12 input_contenedor">
+            <mat-form-field class="form" appearance="outline">
+                <mat-label>Nombre curso</mat-label>
+                <input type="text" matInput placeholder="Placeholder" formControlName="nombreCurso">
+            </mat-form-field>
+            <samp appFormsValidaciones [pasarErrores]="formularioCurso.get('nombreCurso')?.errors"> El nombre es obligatorio</samp>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 input_contenedor">
+            <mat-form-field class="form" appearance="outline"> 
+                <mat-label>Inicia</mat-label>
+                <input matInput [matDatepicker]="fechaInicio" formControlName="inicio">
+                <mat-datepicker-toggle matIconSuffix [for]="fechaInicio"></mat-datepicker-toggle>
+                <mat-datepicker #fechaInicio></mat-datepicker>
+            </mat-form-field>
+            <samp appFormsValidaciones="formularioCurso.get('inicio')?.errors"> </samp>
+        </div>
+
+        <div class="col-md-6 input_contenedor">
+            <mat-form-field class="form" appearance="outline">
+                <mat-label>Finaliza</mat-label>
+                <input matInput [matDatepicker]="fechaFin" formControlName="finaliza">
+                <mat-datepicker-toggle matIconSuffix [for]="fechaFin"></mat-datepicker-toggle>
+                <mat-datepicker #fechaFin></mat-datepicker>
+            </mat-form-field>
+            <samp appFormsValidaciones="formularioCurso.get('finaliza')?.errors"> </samp>
+
+        </div>
+    </div>
+
+    
+
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="cerrarDialog()" >Canceral</button>
+  <button mat-button (click)="guardarCurso()" cdkFocusInitial>Guardar</button>
+</mat-dialog-actions>

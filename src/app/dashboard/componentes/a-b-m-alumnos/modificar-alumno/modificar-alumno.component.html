@@ -70,7 +70,12 @@
       </div>
   
       <div class="row">
-        <button mat-raised-button type="submit" color="primary" >Guardar</button>
+        <div class="col-md-6">
+          <button class="botones" mat-raised-button type="submit" color="primary" >Guardar</button>
+        </div>
+        <div class="col-md-6">
+          <button class="botones"  mat-raised-button (click)="ocultarFormulario()" color="warn" >Cancelar</button>
+        </div>
       </div>
     </form>
   </div>

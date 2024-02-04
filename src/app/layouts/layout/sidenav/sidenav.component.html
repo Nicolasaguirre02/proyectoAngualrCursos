@@ -1,20 +1,36 @@
 <mat-drawer-container id="sidenav" class="example-container" autosize>
-    <mat-drawer #drawer class="example-sidenav" mode="side">
-      
+    <mat-drawer #drawer class="example-sidenav" mode="side" id="sidenav_items" style="background-color: #45214A;" >
+        <div id="sidenav_items_conteneder">
+            <div>
+                <h1>Administracion</h1>
+            </div>
+
+            <div class="list-group" >
+                <button type="button" mat-list-item routerLink="/dashboard/alumno" routerLinkActive="link_activo"  class="btn btn-outline-warning items">Alumnos</button>
+                <button type="button"  mat-list-item routerLink="/dashboard/curso" routerLinkActive="link_activo" class="btn btn-outline-warning items">Cursos</button>
+            </div>
+
+            <div>
+                <button type="button" mat-list-item routerLink="/autenticacion" mat-list-item  class="btn btn-outline-warning items">Salir</button>
+            </div>
+        </div>
+
     </mat-drawer>
   
     <div class="example-sidenav-content">
 
-        <mat-toolbar>
+        <mat-toolbar style="background-color: #21445B; border-bottom: 1px solid rgba(255, 255, 255, 0.348);">
             <button  (click)="drawer.toggle()"  mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-            <mat-icon >menu</mat-icon>
+            <mat-icon style="color: coral;" >menu</mat-icon>
             </button>
             <div  class="d-flex" style="justify-content: center; width: 100%;">
-                <span>Cursos</span>
+                <span style="color: white;">Cursos</span>
             </div>
         </mat-toolbar>
 
-        <app-listado-alumnos></app-listado-alumnos>
+        <router-outlet></router-outlet>
+
+        <!-- <app-listado-alumnos></app-listado-alumnos> -->
 
     </div>
   

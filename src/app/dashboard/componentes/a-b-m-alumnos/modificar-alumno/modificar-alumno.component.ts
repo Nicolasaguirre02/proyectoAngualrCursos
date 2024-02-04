@@ -21,7 +21,9 @@ export class ModificarAlumnoComponent implements OnInit {
 
   @Input() alumnoModificar:any = {};
 
-  @Output() actualizarAlumno = new EventEmitter<any>()
+  @Output() actualizarAlumno = new EventEmitter<any>();
+
+  @Output() ocultarFormularioModificar = new EventEmitter();
 
 
   public formularioAlumno:FormGroup = this.form.group({
@@ -34,7 +36,6 @@ export class ModificarAlumnoComponent implements OnInit {
   })
 
   constructor(private form:FormBuilder){
-    
   }
 
   ngOnInit(): void {
@@ -46,19 +47,24 @@ export class ModificarAlumnoComponent implements OnInit {
       curso:[this.alumnoModificar.curso, [Validators.required ]],
       nota:[this.alumnoModificar.nota, [Validators.required ]],
     })
+
+    
   }
 
   
   guardarModificacion(){
-    
-
     if(this.formularioAlumno.invalid){
       this.formularioAlumno.markAllAsTouched();
       return
     }else{
       this.actualizarAlumno.emit(this.formularioAlumno.value);
+      this.ocultarFormulario();
       this.formularioAlumno.reset()
     }
+  }
+
+  ocultarFormulario(){
+    this.ocultarFormularioModificar.emit();
   }
 
 
