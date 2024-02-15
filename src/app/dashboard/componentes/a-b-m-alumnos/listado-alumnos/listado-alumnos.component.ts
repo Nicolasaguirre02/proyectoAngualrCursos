@@ -35,7 +35,19 @@ export class ListadoAlumnosComponent {
   //Esta funcion guarda los alumnos llamando al servicio
   consumirListaAlumnos(){
     this.mostrarSpinner = true;
-    this.alumnosServicio.listarAlumnos().subscribe(
+    this.alumnosServicio.listarAlumnos().subscribe({
+      next: (alumnos) => {
+        this.listado_alumnos = alumnos ;
+        this.dataSource = this.listado_alumnos
+        this.mostrarSpinner =  false;
+      },
+      error: (error) => {
+        this.alertaMensaje.error("Error al cargar la lista de alumnos")
+        this.mostrarSpinner = false;
+      }
+    })
+
+    /* this.alumnosServicio.listarAlumnos().subscribe(
       (alumnos) => {
         this.listado_alumnos = alumnos ;
         this.dataSource = this.listado_alumnos
@@ -45,13 +57,12 @@ export class ListadoAlumnosComponent {
         console.error("Error al cargar la lista alumnos", error);
         this.mostrarSpinner = false;
       }
-    )
+    ) */
   }
 
 
   alumnoEmitido(alumno: Alumno): void {
-    this.alumnosServicio.guardarNuevoAlumno(alumno);
-    this.consumirListaAlumnos();
+    this.alumnosServicio.guardarNuevoAlumno(alumno).subscribe((rspa) => this.consumirListaAlumnos());
     this.alertaMensaje.succes("Agregado correctamente")
   }
 
@@ -63,26 +74,27 @@ export class ListadoAlumnosComponent {
 
 
   objetoModificar(modificar:Alumno){
-    console.log("a modifciar del padre", modificar)
     this.objetoAlumnoModificar = modificar
   }
 
   modificarDatosAlumno(eve: Alumno) {
-    this.alumnosServicio.modificarAlumno(eve)
-    this.consumirListaAlumnos();
+    console.log("a modifciar del padreeee", eve  )
+    this.alumnosServicio.alumnoPorID(eve).subscribe((rspa) => this.consumirListaAlumnos())
+    /* this.consumirListaAlumnos(); */
     this.alertaMensaje.succes("Modificado correctamente")
   }
 
 
-  eliminarAlumno(alumno: Alumno){
-    const id = this.dataSource.findIndex(alum => alum.idAlumno === alumno.idAlumno);
+  eliminarAlumno(alumno: any){
+/*     const id = this.dataSource.findIndex(alum => alum.idAlumno === alumno.idAlumno);*/
+    const id = alumno.id;
+    console.log("objeto a eliminar", id)
 
     this.alertaMensaje.mostrarAlertaEliminar("Desea eliminar el alumno?")
     .then((confirmado) => {
       if (confirmado) {
         if (id !== -1) {
-          this.dataSource.splice(id, 1);
-          this.dataSource = [...this.dataSource];
+          this.alumnosServicio.eliminarAlumno(id).subscribe((rspa) => this.consumirListaAlumnos());
         }
       }
     });

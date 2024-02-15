@@ -1,5 +1,5 @@
 export interface cursosI{
-    idCurso:number,
+    idCurso:number|string,
     nombreCurso:string,
     inicio:Date,
     finaliza:Date

@@ -1,1 +1,36 @@
-<p>Soy login</p>
+<div class="container-fluid d-flex" id="contenedor">
+    <div id="contenedor_login" >
+        <div class="text-center">
+            <h1 style="color: white;">Bienvenido</h1>
+        </div>
+
+        <form [formGroup]="formularioLogin" class="row text-center d-flex">
+            <p  >
+                <mat-form-field class="formulario_inputs">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="nombre">
+                    <mat-error style="color: white;" appFormsValidaciones [pasarErrores]="formularioLogin.get('nombre')?.errors" >falta </mat-error>
+                </mat-form-field>
+            </p>
+            
+            <p>
+              <mat-form-field  class="formulario_inputs">
+                <mat-label  >Contraseña</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" matInput placeholder="Placeholder" formControlName="password">
+                <mat-error  appFormsValidaciones [pasarErrores]="formularioLogin.get('password')?.errors">Completar</mat-error>
+                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+
+            </mat-form-field>
+            </p>
+
+            <div class="row d-flex" style="justify-content: center;">
+                <button (click)="inicarSesion()" style="width: 20%; height: 7vh; background-color: orange;" mat-raised-button type="submit" color="primary">Guardar</button>
+              </div>
+        </form>
+
+        
+
+    </div>
+</div>

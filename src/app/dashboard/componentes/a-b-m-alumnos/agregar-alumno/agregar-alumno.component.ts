@@ -21,9 +21,10 @@ export class AgregarAlumnoComponent implements OnInit{
   public formularioAlumno:FormGroup = this.form.group({
     nombre:['', [Validators.required, Validators.minLength(5) ]],
     apellido:['', [Validators.required, Validators.minLength(5) ]],
-    edad:[  , [Validators.required ]],
+    edad:[  , [Validators.required,  Validators.pattern, Validators.pattern(/^[0-9]*[1-9][0-9]*$/)]],
     curso:['', [Validators.required ]],
-    nota:[ ,[Validators.required ]]
+    nota:[ ,[Validators.required,  Validators.pattern, Validators.pattern(/^[0-9]*[1-9][0-9]*$/),Validators.max(10)  ]],
+    password:['', [Validators.required ]],
   })
 
   constructor(private form:FormBuilder, private cursosServicio:CargarCursosService){}

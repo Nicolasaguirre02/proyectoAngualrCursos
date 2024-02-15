@@ -28,6 +28,8 @@ export class ModificarAlumnoComponent implements OnInit {
 
   public formularioAlumno:FormGroup = this.form.group({
     idAlumno:[], 
+    id:[],
+    password:[],
     nombre:[''],
     apellido:[''],
     edad:[ ],
@@ -41,6 +43,8 @@ export class ModificarAlumnoComponent implements OnInit {
   ngOnInit(): void {
     this.formularioAlumno = this.form.group({
       idAlumno:[this.alumnoModificar.idAlumno],
+      id:[this.alumnoModificar.id],
+      password:[this.alumnoModificar.password],
       nombre:[this.alumnoModificar.nombre, [Validators.required, Validators.minLength(5) ]],
       apellido:[this.alumnoModificar.apellido, [Validators.required, Validators.minLength(5) ]],
       edad:[this.alumnoModificar.edad, [Validators.required ]],

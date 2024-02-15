@@ -1,38 +1,42 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, delay, mergeMap } from 'rxjs';
 import { cursosI } from '../../compartido/interfaces/cursos/curso';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CargarCursosService {
 
-  private listaCursos$ = new BehaviorSubject<cursosI[]>([
-    {idCurso: 1, nombreCurso: 'Angular', inicio: new Date("2024-02-03"), finaliza:new Date("2024-10-03")}, 
-    {idCurso: 2, nombreCurso: 'SQL', inicio: new Date("2023-05-03"), finaliza:new Date("2024-01-03")}, 
-  ])
+  private listaCursos$ = new BehaviorSubject<cursosI[]>([])
 
   cursos = this.listaCursos$.asObservable();
 
-  constructor() { }
+  constructor(private httpCliente:HttpClient) { }
 
   mostrarCursos(): Observable<cursosI[]>{
-    return this.cursos
+    return this.httpCliente.get<cursosI[]>(`${environment.apiURL}/courses`)
   }
 
-  guardarNuevocurso(nuevocurso: cursosI): void{
-    const listaCactualizada = [{...nuevocurso, idCurso: new Date().getTime()}, ...this.listaCursos$.value];
-    this.listaCursos$.next(listaCactualizada);
+  guardarNuevocurso(nuevocurso: cursosI): Observable<cursosI[]>{
+    const listaCactualizada = {...nuevocurso, idCurso: new Date().getTime()}  ;
+    /* this.listaCursos$.next(listaCactualizada); */
+    console.log("ver lisa", listaCactualizada)
+    return this.httpCliente.post<cursosI[]>(`${environment.apiURL}/courses`, listaCactualizada).pipe(mergeMap(()=>this.mostrarCursos()))
   }
 
 
-  eliminarCurso(id: number){
-    const listaFiltrada = this.listaCursos$.value.filter(eliminar => eliminar.idCurso != id);
-    this.listaCursos$.next(listaFiltrada);
+  eliminarCurso(id: number|string){
+    /* const listaFiltrada = this.listaCursos$.value.filter(eliminar => eliminar.idCurso != id);
+    this.listaCursos$.next(listaFiltrada); */
+    return this.httpCliente.delete(`${environment.apiURL}/courses/${id}`)
   }
 
-  editarCursiID(id: number, data:cursosI){
-    const listaCactualizada = this.listaCursos$.value.map((curso) => (curso.idCurso === id ? {...curso, ...data}: curso ));
-    this.listaCursos$.next(listaCactualizada);
+  editarCursiID(/* id: number|string, data:cursosI */ curso:any){
+    /* const listaCactualizada = this.listaCursos$.value.map((curso) => (curso.idCurso === id ? {...curso, ...data}: curso ));
+    this.listaCursos$.next(listaCactualizada); */
+
+    return this.httpCliente.put(`${environment.apiURL}/courses/${curso.id}`, curso);
   }
 }

@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AgergarCursoComponent } from '../agergar-curso/agergar-curso.component';
 import { CargarCursosService } from '../../../../core/servicios/cargar-cursos.service';
 import { ServicioAlertaService } from '../../../../core/servicios/servicio-alerta.service';
+import { HttpClient } from '@angular/common/http';
 
 
 const listaCursos: cursosI[] = [
@@ -28,7 +29,10 @@ export class ListadoCursosComponent {
 
   consumirListaCursos(){
     this.cursosServicio.mostrarCursos().subscribe({
-      next: (respuesta) => this.dataSource = respuesta
+      next: (respuesta) => {this.dataSource = respuesta},
+      error: (error) => {
+        this.alertaMensaje.error("Error al cargar cursos")
+      }
     })
   }
 
@@ -38,21 +42,29 @@ export class ListadoCursosComponent {
     .subscribe({
       next: (cursos) => { 
         if(cursos == undefined){return}
-        this.cursoServicio.guardarNuevocurso(cursos);
-        this.consumirListaCursos()
+        this.cursoServicio.guardarNuevocurso(cursos).subscribe((resp) => this.consumirListaCursos());
+        /* this.consumirListaCursos() */
       }
     });
   }
 
-  editarCurso(curso:cursosI){
+  editarCurso(curso:any){
     this.dialog.open(AgergarCursoComponent,  {
       data: curso,
     })
     .afterClosed().subscribe({
       next: (resultado) => {
         if(resultado){
-          this.cursoServicio.editarCursiID(curso.idCurso, resultado);
-          this.consumirListaCursos();
+          const cursoModificar = {...resultado, id:curso.id, idCurso:curso.idCurso};
+          this.cursoServicio.editarCursiID(cursoModificar).subscribe({
+            next: () => {
+              this.consumirListaCursos();
+            },
+            error: (mensajeError) => {
+              console.log(mensajeError);
+              this.alertaMensaje.error("Error al modificar el curso")
+            } 
+          });
         }
       }
     })
@@ -60,15 +72,21 @@ export class ListadoCursosComponent {
   }
 
 
-  eliminarCurso(id: number){
+  eliminarCurso(curso:any){
+  const id = curso.id;
 
-    this.alertaMensaje.mostrarAlertaEliminar("Desas eliminar este curso?")
+  this.alertaMensaje.mostrarAlertaEliminar("Desas eliminar este curso?")
     .then( (confirm) => {
         if(confirm){
-          this.cursoServicio.eliminarCurso(id);
-          this.consumirListaCursos();
+          this.cursoServicio.eliminarCurso(id).subscribe({
+            next: () =>{this.consumirListaCursos()},
+            error: (error) => {
+              this.alertaMensaje.error("Error al eliminar el curso")
+            }
+          });
+          
       }
     }
     )
-  }
+  } 
 }

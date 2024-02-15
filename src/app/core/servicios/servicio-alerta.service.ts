@@ -18,6 +18,16 @@ export class ServicioAlertaService {
     });
   }
 
+  error(mensaje:string){
+    return Swal.fire({
+      position: "center",
+      icon: "error",
+      title: mensaje,
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+
   mostrarAlertaEliminar(mensaje:string): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
       Swal.fire({

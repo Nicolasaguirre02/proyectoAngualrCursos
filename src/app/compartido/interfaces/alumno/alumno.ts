@@ -1,8 +1,9 @@
 export interface Alumno {
-    idAlumno:number,
+    idAlumno:number|string,
     nombre:string,
     apellido:string,
     edad:number,
     curso:string,
-    nota:number
+    nota:number,
+    password:string
 }

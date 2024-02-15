@@ -4,20 +4,26 @@ import { LoginComponent } from './dashboard/componentes/autenticacion/login/logi
 import { ListadoAlumnosComponent } from './dashboard/componentes/a-b-m-alumnos/listado-alumnos/listado-alumnos.component';
 import { SidenavComponent } from './layouts/layout/sidenav/sidenav.component';
 import { ListadoCursosComponent } from './dashboard/componentes/a-b-m-cursos/listado-cursos/listado-cursos.component';
+import { autenticacionGuard } from './core/guards/autenticacion.guard';
 
 const routes: Routes = [
   {
     path:'dashboard',
+    canActivate:[autenticacionGuard],
     component:SidenavComponent,
     children: [
       {
         path:'alumno',
-        component:ListadoAlumnosComponent
+        loadChildren: () => import('./dashboard/componentes/a-b-m-alumnos/alumnos-routing.module').then((mod) => mod.AlumnosRoutingModule)
       },
       {
-        path:'curso',
-        component:ListadoCursosComponent
-      }
+        path:'cursos',
+        loadChildren: () => import("./dashboard/componentes/a-b-m-cursos/cursos-routing.module").then((m) => m.CursosRoutingModule)
+      },
+      {
+        path:'**',
+        redirectTo:'cursos'
+      } 
     ]
   },
   {
@@ -26,7 +32,7 @@ const routes: Routes = [
   },
   {
     path:'**',
-    redirectTo:'LoginComponent'
+    redirectTo:'autenticacion'
   } 
 ];
 

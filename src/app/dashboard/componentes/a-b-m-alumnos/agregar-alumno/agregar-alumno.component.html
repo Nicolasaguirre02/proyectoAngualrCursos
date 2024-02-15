@@ -26,7 +26,7 @@
     </div>
 
     <div class="row">
-      <div class="col-5 columna">
+      <div class="col-6 columna">
           <mat-form-field  class="form" appearance="outline">
             <mat-label>Edad</mat-label>
             <input 
@@ -39,25 +39,40 @@
               >El nombre es obligatorio</samp>
           </mat-form-field>
       </div>
-      <div class="col-5 columna">
+      <div class="col-6 columna">
         <mat-form-field>
           <mat-label>Curso</mat-label>
           <select formControlName="curso" matNativeControl required>
-            <option *ngFor="let curso of listaCursos" [value]="curso.value">{{ curso.nombreCurso }}</option>
+            <option *ngFor="let curso of listaCursos" [value]="curso.nombreCurso">{{ curso.nombreCurso }}</option>
           </select>          
           <samp appFormsValidaciones
                 [pasarErrores]="formularioAlumno.get('curso')?.errors"
               >El nombre es obligatorio</samp>
         </mat-form-field>
       </div>
+    </div>
 
-      <div class="col-2 columna">
+    <div class="row">
+      <div class="col-6 columna">
         <mat-form-field class="form" appearance="outline">
           <mat-label>Nota</mat-label>
           <input 
                 type="number"
                  matInput placeholder="Placeholder"              
                  formControlName="nota">
+                 <samp appFormsValidaciones
+                [pasarErrores]="formularioAlumno.get('nota')?.errors"
+              >El nombre es obligatorio</samp>
+        </mat-form-field>
+      </div>
+
+      <div class="col-6 columna">
+        <mat-form-field class="form" appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input 
+                type="text"
+                 matInput placeholder="Placeholder"              
+                 formControlName="password">
                  <samp appFormsValidaciones
                 [pasarErrores]="formularioAlumno.get('nota')?.errors"
               >El nombre es obligatorio</samp>

@@ -1,44 +1,48 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, delay, map, timer } from 'rxjs';
+import { BehaviorSubject, Observable, delay, map, mergeMap, timer } from 'rxjs';
 import { Alumno } from '../../compartido/interfaces/alumno/alumno'; 
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CargarAlumnosService {
 
-  private listaAlumnos$ = new BehaviorSubject<Alumno[]>([
-    { idAlumno: 1, nombre: 'Nicolas', apellido: 'Aguirre', edad: 21, curso: 'Angular', nota: 8 },
-    { idAlumno: 2, nombre: 'Hernan', apellido: 'Fernandez', edad: 29, curso: 'SQL', nota: 9 },
-  ]);
+  private listaAlumnos$ = new BehaviorSubject<Alumno[]>([ ]);
 
 
   // Observable que permite a otros componentes o servicios suscribirse para recibir actualizaciones de estudiantes
   // de una forma mas segura.
   alumnos$ = this.listaAlumnos$.asObservable();
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
 
   //Esta funcion retorna un observable
   listarAlumnos(): Observable<Alumno[]> {
-    /* return this.alumnos$ */
-
-    return timer(2000).pipe(
+    /* return timer(2000).pipe(
       map(() => this.listaAlumnos$.getValue())
-    ); 
+    ); */ 
+
+    return this.httpClient.get<Alumno[]>("http://localhost:3000/students").pipe(delay(2000))
   }
 
 
 
- guardarNuevoAlumno(nuevoAlumno:Alumno): void{
-    const listaActualizada = [{...nuevoAlumno, idAlumno: new Date().getTime()} , ...this.listaAlumnos$.value]
-    this.listaAlumnos$.next(listaActualizada)
+  guardarNuevoAlumno(alumno:Alumno){
+    let nuevoAlumno:Alumno = {...alumno, idAlumno: new Date().getTime()}
+    console.log("mostrar alumno", nuevoAlumno); 
+    return this.httpClient.post<Alumno>(`${environment.apiURL}/students`,nuevoAlumno).pipe(mergeMap(() => this.listarAlumnos()));
+    /* ver.subscribe((resp) => {console.log(resp)} ); */
   } 
 
 
-  modificarAlumno(alumnoModificado: Alumno) : void{
-    const lista = this.listaAlumnos$.value;
+  alumnoPorID(alumnoModificado: any) {
+    console.log("esto se va a modificar", alumnoModificado)
+    return this.httpClient.put(`${environment.apiURL}/students/${alumnoModificado.id}`, alumnoModificado)
+
+/*     const lista = this.listaAlumnos$.value;
     const index = lista.findIndex( (alumno) => alumno.idAlumno == alumnoModificado.idAlumno );
 
     if (index !== -1) {
@@ -49,6 +53,11 @@ export class CargarAlumnosService {
       this.listaAlumnos$.next([...lista]);
   
       console.log("Lista de alumnos modificada:", lista);
-    }
+    } */
+  }
+
+  eliminarAlumno(id:string|number){
+
+    return this.httpClient.delete(`${environment.apiURL}/students/${id}`)
   }
 }

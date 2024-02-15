@@ -1,0 +1,47 @@
+{
+  "students": [
+    {
+      "idAlumno": 1707772070198,
+      "id": "48ad",
+      "password": "hh",
+      "nombre": "nicolas",
+      "apellido": "aguirre",
+      "edad": 212,
+      "curso": "SQL",
+      "nota": 9
+    },
+    {
+      "id": "6c45",
+      "nombre": "hernan",
+      "apellido": "fernandez",
+      "edad": 22,
+      "curso": "Java",
+      "nota": 10,
+      "password": "12345",
+      "idAlumno": 1707863267920
+    }
+  ],
+  "courses": [
+    {
+      "nombreCurso": "Java",
+      "inicio": "2024-02-01T03:00:00.000Z",
+      "finaliza": "2024-02-19T03:00:00.000Z",
+      "id": "e8a2",
+      "idCurso": 1707788589256
+    },
+    {
+      "id": "4f0d",
+      "nombreCurso": "SQL",
+      "inicio": "2024-02-01T03:00:00.000Z",
+      "finaliza": "2024-04-25T03:00:00.000Z",
+      "idCurso": 1707789350329
+    },
+    {
+      "id": "b6f8",
+      "nombreCurso": "React js",
+      "inicio": "2024-01-01T03:00:00.000Z",
+      "finaliza": "2024-05-11T03:00:00.000Z",
+      "idCurso": 1707863320514
+    }
+  ]
+}

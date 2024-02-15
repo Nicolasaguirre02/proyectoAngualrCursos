@@ -1,0 +1,22 @@
+#contenedor{
+    background-image: url(../../../../../assets/imagenes/fondo_login.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: center; 
+    height: 100vh; 
+    align-items: center;
+}
+
+#contenedor_login{
+    border-radius: 8px;
+    backdrop-filter: blur(15px);
+    width: 80%; 
+    height: 80%;
+}
+
+.formulario_inputs{
+    width: 70%;
+    border-color: white;
+    margin: 20px;
+    
+}
