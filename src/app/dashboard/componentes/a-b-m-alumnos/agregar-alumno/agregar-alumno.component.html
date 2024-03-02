@@ -1,5 +1,5 @@
 <div id="contenedor_formulario">
-  <h2 appTitulos >Agregar nuevo alumno</h2>
+  <h2 appTitulos >Agregar nueva persona</h2>
   <form [formGroup]="formularioAlumno" (ngSubmit)="guardarAlumno()" id="formulario">
     <div class="row">
       <div class="col-6 columna">
@@ -40,32 +40,21 @@
           </mat-form-field>
       </div>
       <div class="col-6 columna">
-        <mat-form-field>
-          <mat-label>Curso</mat-label>
-          <select formControlName="curso" matNativeControl required>
-            <option *ngFor="let curso of listaCursos" [value]="curso.nombreCurso">{{ curso.nombreCurso }}</option>
-          </select>          
-          <samp appFormsValidaciones
-                [pasarErrores]="formularioAlumno.get('curso')?.errors"
-              >El nombre es obligatorio</samp>
+        <mat-form-field  class="form" appearance="outline">
+          <mat-label>Nombre de usuario</mat-label>
+          <input 
+                type="text"
+                matInput placeholder="Placeholder"
+                formControlName="nombreUsuario"
+              >
+              <samp appFormsValidaciones
+              [pasarErrores]="formularioAlumno.get('nombreUsuario')?.errors"
+            >Compo obligatorio</samp>
         </mat-form-field>
-      </div>
+    </div>
     </div>
 
     <div class="row">
-      <div class="col-6 columna">
-        <mat-form-field class="form" appearance="outline">
-          <mat-label>Nota</mat-label>
-          <input 
-                type="number"
-                 matInput placeholder="Placeholder"              
-                 formControlName="nota">
-                 <samp appFormsValidaciones
-                [pasarErrores]="formularioAlumno.get('nota')?.errors"
-              >El nombre es obligatorio</samp>
-        </mat-form-field>
-      </div>
-
       <div class="col-6 columna">
         <mat-form-field class="form" appearance="outline">
           <mat-label>Contraseña</mat-label>
@@ -78,7 +67,22 @@
               >El nombre es obligatorio</samp>
         </mat-form-field>
       </div>
+
+      <div class="col-6 columna">
+        <mat-form-field>
+          <mat-label>Tipo</mat-label>
+          <select formControlName="tipo" matNativeControl required (ngModelChange)="seleccionarCurso()">
+            <option  value="ADMIN">ADMIN</option>
+            <option  value="ALUMNO">ALUMNO</option>
+          </select>          
+          <samp appFormsValidaciones
+                [pasarErrores]="formularioAlumno.get('tipo')?.errors"
+              >El nombre es obligatorio</samp>
+        </mat-form-field>
+      </div>
+
     </div>
+
 
     <div class="row">
       <button mat-raised-button type="submit" color="primary">Guardar</button>

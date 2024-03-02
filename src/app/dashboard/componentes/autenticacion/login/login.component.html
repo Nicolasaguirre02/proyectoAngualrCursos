@@ -4,7 +4,7 @@
             <h1 style="color: white;">Bienvenido</h1>
         </div>
 
-        <form [formGroup]="formularioLogin" class="row text-center d-flex">
+        <form [formGroup]="formularioLogin" (submit)="inicarSesion()" class="row text-center d-flex">
             <p  >
                 <mat-form-field class="formulario_inputs">
                     <mat-label>Nombre</mat-label>
@@ -26,7 +26,7 @@
             </p>
 
             <div class="row d-flex" style="justify-content: center;">
-                <button (click)="inicarSesion()" style="width: 20%; height: 7vh; background-color: orange;" mat-raised-button type="submit" color="primary">Guardar</button>
+                <button id="btnIngresar"  style="width: 20%; height: 7vh; background-color: orange;" mat-raised-button type="submit" color="primary">Guardar</button>
               </div>
         </form>
 

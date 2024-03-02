@@ -8,6 +8,8 @@ import { ABMCursosModule } from './componentes/a-b-m-cursos/a-b-m-cursos.module'
 import { AutenticacionModule } from './componentes/autenticacion/autenticacion.module';
 import { ListadoCursosComponent } from './componentes/a-b-m-cursos/listado-cursos/listado-cursos.component';
 import { LoginComponent } from './componentes/autenticacion/login/login.component';
+import { InscripcionesModule } from './componentes/inscripciones/inscripciones.module';
+import { InscripcionesComponent } from './componentes/inscripciones/inscripciones/inscripciones.component';
 
 
 
@@ -18,16 +20,15 @@ import { LoginComponent } from './componentes/autenticacion/login/login.componen
     CommonModule,
     ABMAlumnosModule,
     ABMCursosModule,
-    AutenticacionModule
+    AutenticacionModule,
+    InscripcionesModule
   ],
   exports:[
     ListadoAlumnosComponent,
     AgregarAlumnoComponent,
     ModificarAlumnoComponent,
-
     ListadoCursosComponent,
-
-    LoginComponent
+    LoginComponent,
   ]
 })
 export class DashboardModule {  }

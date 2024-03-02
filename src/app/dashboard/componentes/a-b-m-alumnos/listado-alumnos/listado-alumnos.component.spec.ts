@@ -3,7 +3,6 @@ import { ListadoAlumnosComponent } from "./listado-alumnos.component"
 import {MockProvider} from 'ng-mocks'
 import { of } from 'rxjs';
 import { CargaMockAlumnosService } from "../../../../core/servicios/carga-mock-alumnos.service";
-import { HttpClient } from "@angular/common/http";
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe("Prueba de alumnos component", () => {
@@ -18,24 +17,26 @@ describe("Prueba de alumnos component", () => {
                     listarAlumnos: () => 
                         of([
                             {
-                                idAlumno: 1707751450671,
-                                id: "b302",
-                                password: "ds",
-                                nombre: "wwwww",
-                                apellido: "cdcdcdc",
-                                edad: 32,
-                                curso: "Angular",
-                                nota: 3
+                                idAlumno: 1707863267920,
+                                id: "6c45",
+                                password: "12345",
+                                nombre: "hernann",
+                                apellido: "fernandez",
+                                edad: 22,
+                                curso: "Java",
+                                tipo: "ALUMNO",
+                                nombreUsuario: "hernanF"
                               },
                               {
-                                id: "2da0",
-                                nombre: "deded",
-                                apellido: "deded",
-                                edad: 2,
-                                curso: "Angular",
-                                nota: 2,
-                                password: "d",
-                                idAlumno: 1707751625296
+                                idAlumno: 1707863267920,
+                                id: "6c45",
+                                password: "12345",
+                                nombre: "hernann",
+                                apellido: "fernandez",
+                                edad: 22,
+                                curso: "Java",
+                                tipo: "ALUMNO",
+                                nombreUsuario: "hernanF"
                               }
                         ])
                 })],
@@ -44,12 +45,11 @@ describe("Prueba de alumnos component", () => {
     componente = TestBed.createComponent(ListadoAlumnosComponent).componentInstance;
     })
 
-    it('Las columnas de la tabla alumnos deben ser idAlumo, nombreapellido, edad, curso, nota, acciones', () => {
+    it('Las columnas de la tabla alumnos deben ser idAlumo, nombreapellido, edad, curso, acciones', () => {
         expect(componente.displayedColumns).toContain('idAlumno');
         expect(componente.displayedColumns).toContain('nombreApellido');
         expect(componente.displayedColumns).toContain('edad');
         expect(componente.displayedColumns).toContain('curso');
-        expect(componente.displayedColumns).toContain('nota');
         expect(componente.displayedColumns).toContain('acciones');
     })
 

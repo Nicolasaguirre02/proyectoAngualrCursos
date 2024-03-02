@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: () => import("./dashboard/componentes/a-b-m-cursos/cursos-routing.module").then((m) => m.CursosRoutingModule)
       },
       {
+        path:'inscripciones',
+        loadChildren: () => import("./dashboard/componentes/inscripciones/inscripciones-routing.module").then((m) => m.InscripcionesRoutingModule )
+      },
+      {
         path:'**',
         redirectTo:'cursos'
       } 

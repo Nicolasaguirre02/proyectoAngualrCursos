@@ -3,6 +3,10 @@ import { Alumno } from '../../compartido/interfaces/alumno/alumno';
 import { Router } from '@angular/router';
 import { ServicioAlertaService } from './servicio-alerta.service';
 import { Observable, delay, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environment/environment';
+import { Store } from '@ngrx/store';
+import { accionAutenticacion } from '../store/autenticacion/actions';
 
 @Injectable({
   providedIn: 'root'
@@ -13,27 +17,36 @@ export class AutenticacionService {
 
   loginUsuario: Alumno | null = null;
 
-  constructor(private router:Router, private alertaServicio:ServicioAlertaService) { }
+  constructor(private router:Router, 
+              private alertaServicio:ServicioAlertaService, 
+              private httpCliente: HttpClient,
+              private store:Store) { }
   
 
-  inicisarSesion(datos:any){
-    this.loginUsuario={
-      idAlumno: new Date().getMilliseconds(),
-      nombre:"nicolas",
-      apellido:"aguirre",
-      curso:"SQL",
-      nota:10,
-      edad:21,
-      password:"12345"
-    };
+  inicisarSesion(datos:Alumno){
+    this.httpCliente.get<Alumno[]>
+    (`${environment.apiURL}/students/?nombreUsuario=${datos.nombre}&password=${datos.password}`)
+    .subscribe({
+      next: (alunmo)=>{
+        if(alunmo.length > 0){
+          const usuario = alunmo[0];
+          this.router.navigate(['dashboard','alumno']),
+          this.store.dispatch(accionAutenticacion.usuarioAutenticado({usuario})),
+          this.asignarToken(alunmo[0]);
 
-    if(this.loginUsuario?.nombre === datos.nombre && this.loginUsuario.password === datos.password){
-      this.router.navigate(['dashboard','alumno']),
-      localStorage.setItem('token', 'vfvrfe44rf4rf44srfrg2jw4thgniwnbfawai4')
-    }else{
-      this.alertaServicio.error("Datos incorrectos")
+        }else{
+          this.alertaServicio.error("Datos incorrectos")
+        }
+        
+      }
+    });
+    
+  }
+
+  asignarToken(datos:Alumno){
+    if(datos.token){
+      localStorage.setItem('token', datos.token)
     }
-    console.log(this.loginUsuario)
   }
 
   salir(){
@@ -49,5 +62,5 @@ export class AutenticacionService {
       obser.next(localStorage.getItem('token'))
     })
     .pipe(delay(1000), map((respuesta) =>  !!respuesta))
-  }
+  }  
 }

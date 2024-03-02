@@ -8,6 +8,8 @@ import { MatInputModule } from "@angular/material/input"
 import { MatButtonModule } from "@angular/material/button"
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { CompartidoModule } from "../../../../compartido/compartido.module"
+import { By } from "@angular/platform-browser"
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 
 describe('Login', () => {
     let componente:LoginComponent;
@@ -22,6 +24,7 @@ describe('Login', () => {
                     MatButtonModule,
                     FormsModule,
                     ReactiveFormsModule,
+                    BrowserAnimationsModule,
                     CompartidoModule],
             declarations:[LoginComponent],
             providers:[AutenticacionService]
@@ -32,7 +35,19 @@ describe('Login', () => {
     });
 
     it("Inicio de sesion instanciado", () => {
-        expect(componente).toBeTruthy();
+        expect(componente).toBeTruthy(); //Verifica si el componente fue instanciado correctamente
+    });
+
+    it("Verificar validacion del fomulario 'valido/invalido'", () => {
+        const fixture = TestBed.createComponent(LoginComponent);
+        fixture.detectChanges();
+        const usuario = componente.formularioLogin.controls['nombre'];
+        const password = componente.formularioLogin.controls['password'];
+        
+        usuario.setValue('nicolas');
+        password.setValue('12345');
+
+        expect(componente.formularioLogin.valid).toBeTrue();
     })
 
 })

@@ -61,7 +61,6 @@ export class ListadoCursosComponent {
               this.consumirListaCursos();
             },
             error: (mensajeError) => {
-              console.log(mensajeError);
               this.alertaMensaje.error("Error al modificar el curso")
             } 
           });

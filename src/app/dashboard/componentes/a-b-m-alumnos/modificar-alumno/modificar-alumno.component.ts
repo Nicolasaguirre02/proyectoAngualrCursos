@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, input, } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Alumno } from '../../../../compartido/interfaces/alumno/alumno';
+import { CargarCursosService } from '../../../../core/servicios/cargar-cursos.service';
+import { cursosI } from '../../../../compartido/interfaces/cursos/curso';
 
 
 @Component({
@@ -10,14 +12,7 @@ import { Alumno } from '../../../../compartido/interfaces/alumno/alumno';
 })
 export class ModificarAlumnoComponent implements OnInit {
 
-  listaCursos: any = [
-    {value: 'Angular', nombre: 'Angular'},
-    {value: 'WordPress', nombre: 'WordPress'},
-    {value: 'SQL', nombre: 'SQL'},
-    {value: 'Python', nombre: 'Python'},
-    {value: 'CSS', nombre: 'CSS'},
-    {value: 'Next.js', nombre: 'Next.js'},
-  ];
+  listaCursos: cursosI[] = [];
 
   @Input() alumnoModificar:any = {};
 
@@ -33,11 +28,11 @@ export class ModificarAlumnoComponent implements OnInit {
     nombre:[''],
     apellido:[''],
     edad:[ ],
-    curso:[''],
-    nota:[ ],
+    tipo:[''],
+    nombreUsuario:['']
   })
 
-  constructor(private form:FormBuilder){
+  constructor(private form:FormBuilder, private servicioCursos:CargarCursosService){
   }
 
   ngOnInit(): void {
@@ -48,11 +43,21 @@ export class ModificarAlumnoComponent implements OnInit {
       nombre:[this.alumnoModificar.nombre, [Validators.required, Validators.minLength(5) ]],
       apellido:[this.alumnoModificar.apellido, [Validators.required, Validators.minLength(5) ]],
       edad:[this.alumnoModificar.edad, [Validators.required ]],
-      curso:[this.alumnoModificar.curso, [Validators.required ]],
-      nota:[this.alumnoModificar.nota, [Validators.required ]],
+      tipo:[this.alumnoModificar.tipo],
+      nombreUsuario:[this.alumnoModificar.nombreUsuario]
     })
 
+    this.guardarListaCursos();
     
+  }
+
+  guardarListaCursos(){
+    this.servicioCursos.mostrarCursos().subscribe({
+      next:(cursos) =>{
+        console.log(cursos)
+        this.listaCursos = cursos
+      }
+    })
   }
 
   

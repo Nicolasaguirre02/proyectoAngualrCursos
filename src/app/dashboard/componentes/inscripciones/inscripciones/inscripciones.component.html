@@ -1,0 +1,45 @@
+<!-- <p>{{inscripciones$ | async | json}}</p> -->
+<div id="tabla">
+
+    <button style="margin: 5px;" (click)="crearInscripcion()" mat-raised-button>Nueva inscripcion</button>
+
+
+<table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> <h2>Inscripciones</h2> </th>
+        <td mat-cell *matCellDef="let element">
+        
+            <mat-accordion >
+            <mat-expansion-panel  style="margin-top: 10px;" (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title style="color: black; font-size: 18;">
+                     {{element.student.nombre}} {{element.student.apellido}}
+                    </mat-panel-title>
+                    <mat-panel-description style="color: black; font-size: 15px;">
+                     {{element.course.nombreCurso}}
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <p style="font-weight: bold;">Informacion sobre el curso</p>
+                  <p> Inicia:{{element.course.inicio | date:'dd/MM/yyyy'}} </p>
+                  <p>  Finaliza: {{element.course.finaliza | date:'dd/MM/yyyy'}}</p>
+                </mat-expansion-panel>
+              </mat-accordion>
+              
+        
+        </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element"> <button mat-raised-button color="warn" (click)="eliminarInscripcion(element.id)">Eliminar</button> </td>
+          </ng-container>
+    
+        
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+  

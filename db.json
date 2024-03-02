@@ -3,22 +3,35 @@
     {
       "idAlumno": 1707772070198,
       "id": "48ad",
-      "password": "hh",
+      "password": "12345",
       "nombre": "nicolas",
       "apellido": "aguirre",
+      "nombreUsuario": "nicoAguirre",
       "edad": 212,
       "curso": "SQL",
-      "nota": 9
+      "tipo": "ADMIN",
+      "token": "WWT8EAdWcxVhCUAc3Z4EUvVbNLssQA22"
     },
     {
-      "id": "6c45",
-      "nombre": "hernan",
-      "apellido": "fernandez",
-      "edad": 22,
-      "curso": "Java",
-      "nota": 10,
+      "idAlumno": 1709421869306,
+      "id": "a5bb",
       "password": "12345",
-      "idAlumno": 1707863267920
+      "nombre": "alumno uno",
+      "apellido": "alumno",
+      "edad": 24,
+      "tipo": "ALUMNO",
+      "nombreUsuario": "alumnoUno"
+    },
+    {
+      "id": "a89d",
+      "nombre": "alumno dos",
+      "apellido": "hernan",
+      "edad": 28,
+      "nombreUsuario": "hernan",
+      "password": "12345",
+      "tipo": "ALUMNO",
+      "idAlumno": 1709421966331,
+      "token": "6LEysMZbybXgFruwPVM4tyf3vvI2xjfj"
     }
   ],
   "courses": [
@@ -37,11 +50,30 @@
       "idCurso": 1707789350329
     },
     {
-      "id": "b6f8",
+      "id": "1707863320514",
       "nombreCurso": "React js",
       "inicio": "2024-01-01T03:00:00.000Z",
       "finaliza": "2024-05-11T03:00:00.000Z",
-      "idCurso": 1707863320514
+      "idCurso": "1707863320514"
+    },
+    {
+      "id": "1ce3",
+      "nombreCurso": "Ingles",
+      "inicio": "2024-03-20T03:00:00.000Z",
+      "finaliza": "2024-06-19T03:00:00.000Z",
+      "idCurso": 1709421929448
+    }
+  ],
+  "registrations": [
+    {
+      "id": "e718",
+      "studentId": "a5bb",
+      "courseId": "4f0d"
+    },
+    {
+      "id": "b19a",
+      "studentId": "a89d",
+      "courseId": "e8a2"
     }
   ]
 }
